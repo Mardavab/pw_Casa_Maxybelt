@@ -1,39 +1,4 @@
-<!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
-<!-- BEGIN: Head-->
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description"
-        content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
-    <meta name="keywords"
-        content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
-    <meta name="author" content="ThemeSelect">
-    <title>Blank Page | Materialize - Material Design Admin Template</title>
-    <link rel="apple-touch-icon" href="">
-    <link rel="shortcut icon" type="image/x-icon" href="">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- BEGIN: VENDOR CSS-->
-    <link rel="stylesheet" type="text/css" href="../assets/vendors/vendors.min.css">
-    <!-- END: VENDOR CSS-->
-    <!-- BEGIN: Page Level CSS-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/themes/horizontal-menu-template/materialize.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/themes/horizontal-menu-template/style.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/layouts/style-horizontal.css">
-    <!-- END: Page Level CSS-->
-    <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/custom/custom.css">
-    <!-- END: Custom CSS-->
-</head>
-<!-- END: Head-->
-
-<body class="horizontal-layout page-header-light horizontal-menu preload-transitions 2-columns   " data-open="click"
-    data-menu="horizontal-menu" data-col="2-columns">
-
-    <!-- BEGIN: Header-->
-    <header class="page-topbar" id="header">
+<header class="page-topbar" id="header">
         <div class="navbar navbar-fixed">
             <nav
                 class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-light-blue-cyan">
@@ -91,9 +56,40 @@
             <nav class="white hide-on-med-and-down" id="horizontal-nav">
                 <div class="nav-wrapper">
                     <ul class="left hide-on-med-and-down" id="ul-horizontal-nav" data-menu="menu-navigation">
-                        <li><a href="../index.html"><i class="material-icons">home</i><span><span class="dropdown-title"
-                                        data-i18n="Dashboard">Home</span></span></a></li>
-                        <li><a class="dropdown-menu" href="Javascript:void(0)" data-target="home"><i
+                        <?php foreach (menu() as $key => $menu): ?>
+                            <li>
+                                <a
+                                class="<?= count($menu->detail) >= 1 ? 'dropdown-menu' : '' ?>"
+                                href="<?= count($menu->detail) == 0 ? $menu->url : 'javascript:void(0)' ?>"
+                                    <?php if(count($menu->detail) > 0): ?>
+                                        data-target="menu_<?= $key ?>"
+                                    <?php endif ?>
+                                >
+                                    <i class="material-icons"><?= $menu->icon ?></i>
+                                    <span>
+                                        <span class="dropdown-title" data-i18n="Dashboard">
+                                            <?= $menu->title ?>
+                                        </span>
+                                        <?php if(count($menu->detail) > 0): ?>
+                                            <i class="material-icons right">keyboard_arrow_down</i>
+                                        <?php endif ?>
+                                    </span>
+                                </a>
+                                <?php if(count($menu->detail) > 0): ?>
+                                    <ul class="dropdown-content dropdown-horizontal-list" id="menu_<?= $key ?>">
+                                        <?php foreach ($menu->detail as $key => $detail):?>
+                                            <li data-menu=""><a href="<?= $detail->url ?>"><span
+                                                data-i18n="Modern"><?= $detail->title ?></span></a>
+                                            </li>
+                                        <?php endforeach ?>
+                                    </ul>
+                                <?php endif ?>
+                            </li>
+                        <?php endforeach ?>
+                        <!-- <li><a href="../index.html"><i class="material-icons">home</i><span><span class="dropdown-title"
+                                        data-i18n="Dashboard">Home</span></span></a></li> -->
+
+                        <!-- <li><a class="dropdown-menu" href="Javascript:void(0)" data-target="home"><i
                                     class="material-icons">assignment</i><span><span class="dropdown-title"
                                         data-i18n="Dashboard">Facturas</span><i
                                         class="material-icons right">keyboard_arrow_down</i></span></a>
@@ -108,10 +104,11 @@
                                             data-i18n="Analytics">Gastos</span></a>
                                 </li>
                             </ul>
-                        </li>
-                        <li><a href="../index.html"><i class="material-icons">account_balance_wallet</i><span><span
-                                        class="dropdown-title" data-i18n="Dashboard">Cartera</span></span></a></li>
-                        <li><a class="dropdown-menu" href="Javascript:void(0)" data-target="DashboardDropdown"><i
+                        </li> -->
+                        <!-- <li><a href="../index.html"><i class="material-icons">account_balance_wallet</i><span><span
+                                        class="dropdown-title" data-i18n="Dashboard">Cartera</span></span></a></li> -->
+
+                        <!-- <li><a class="dropdown-menu" href="Javascript:void(0)" data-target="DashboardDropdown"><i
                                     class="material-icons">bubble_chart</i><span><span class="dropdown-title"
                                         data-i18n="Dashboard">Productos</span><i
                                         class="material-icons right">keyboard_arrow_down</i></span></a>
@@ -124,8 +121,8 @@
                                 </li>
 
                             </ul>
-                        </li>
-                        <li><a class="dropdown-menu" href="Javascript:void(0)" data-target="customers"><i
+                        </li> -->
+                        <!-- <li><a class="dropdown-menu" href="Javascript:void(0)" data-target="customers"><i
                                     class="material-icons">perm_contact_calendar</i><span><span class="dropdown-title"
                                         data-i18n="Dashboard">Clientes</span><i
                                         class="material-icons right">keyboard_arrow_down</i></span></a>
@@ -138,11 +135,11 @@
                                 </li>
 
                             </ul>
-                        </li>
-                        <li><a href="../index.html"><i class="material-icons">people</i><span><span
+                        </li> -->
+                        <!-- <li><a href="../index.html"><i class="material-icons">people</i><span><span
                                         class="dropdown-title" data-i18n="Dashboard">Usuarios</span></span></a></li>
                         <li><a href="../index.html"><i class="material-icons">people</i><span><span
-                                        class="dropdown-title" data-i18n="Dashboard">Metodos de Pagos</span></span></a></li>
+                                        class="dropdown-title" data-i18n="Dashboard">Metodos de Pagos</span></span></a></li> -->
 
 
                     </ul>
@@ -151,83 +148,3 @@
             </nav>
         </div>
     </header>
-
-
-
-
-    <!-- BEGIN: Page Main-->
-    <div id="main">
-        <div class="row">
-            <div class="pt-1 pb-0" id="breadcrumbs-wrapper">
-                <!-- Search for small screen-->
-                <div class="container">
-                    <div class="row">
-                        <div class="col s12 m6 l6">
-                            <h5 class="breadcrumbs-title"><span>Blank Page</span></h5>
-                        </div>
-                        <div class="col s12 m6 l6 right-align-md">
-                            <ol class="breadcrumbs mb-0">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
-                                </li>
-                                <li class="breadcrumb-item"><a href="#">Pages</a>
-                                </li>
-                                <li class="breadcrumb-item active">Blank Page
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="container">
-                    <div class="section">
-                        <div class="card">
-                            <div class="card-content">
-                                <p class="caption mb-0">
-                                    Sample blank page for getting start!! Created and designed by Google, Material
-                                    Design is a design
-                                    language that combines the classic principles of successful design along with
-                                    innovation and
-                                    technology.
-                                </p>
-                            </div>
-                        </div>
-                    </div><!-- START RIGHT SIDEBAR NAV -->
-
-
-                </div>
-                <div class="content-overlay"></div>
-            </div>
-        </div>
-    </div>
-    <!-- END: Page Main-->
-
-    <!-- BEGIN: Footer-->
-
-    <footer
-        class="page-footer footer footer-static footer-dark gradient-45deg-light-blue-cyan gradient-shadow navbar-border navbar-shadow">
-        <div class="footer-copyright">
-            <div class="container"><span>&copy; 2020 <a
-                        href="http://themeforest.net/user/pixinvent/portfolio?ref=pixinvent"
-                        target="_blank">PIXINVENT</a> All rights reserved.</span><span
-                    class="right hide-on-small-only">Design and Developed by <a
-                        href="https://pixinvent.com/">PIXINVENT</a></span></div>
-        </div>
-    </footer>
-
-    <!-- END: Footer-->
-    <!-- BEGIN VENDOR JS-->
-    <script src="../assets/js/vendors.min.js"></script>
-    <!-- BEGIN VENDOR JS-->
-    <!-- BEGIN PAGE VENDOR JS-->
-    <!-- END PAGE VENDOR JS-->
-    <!-- BEGIN THEME  JS-->
-    <script src="../assets/js/plugins.js"></script>
-    <script src="../assets/js/search.js"></script>
-    <script src="../assets/js/custom/custom-script.js"></script>
-    <!-- END THEME  JS-->
-    <!-- BEGIN PAGE LEVEL JS-->
-    <!-- END PAGE LEVEL JS-->
-</body>
-
-</html>
