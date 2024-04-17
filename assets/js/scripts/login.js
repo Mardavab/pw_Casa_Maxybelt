@@ -12,5 +12,9 @@ function login() {
         return Swal.fire({
             icon: (username == "admin" && password == "1234") ? 'success': 'error' ,
             title: (username == "admin" && password == "1234") ? 'Incio sesion el admin':'no Inicio sesion el admin'
+        }).then((result) => {
+            console.log(result);
+            if(result.isDismissed || result.isConfirmed)
+                window.location = "http://localhost:3000/pages"
         })
 }
